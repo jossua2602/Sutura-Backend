@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\AdminRegistrationController;
+use App\Http\Controllers\Api\AdminAccountController;
+use App\Http\Controllers\Api\AdminSubscriptionController;
 
 Route::get('/test-connection', function () {
     return response()->json([
@@ -22,3 +24,22 @@ Route::get('/admin/registrations/pending', [AdminRegistrationController::class, 
 
 // Route para i-update ang status (Approve/Reject)
 Route::put('/admin/registrations/{shop_id}/status', [AdminRegistrationController::class, 'updateStatus']);
+
+// Route para sa Manage Accounts
+Route::get('/admin/accounts', [AdminAccountController::class, 'index']);
+
+// Route para mag-save ng bagong account
+Route::post('/admin/accounts', [AdminAccountController::class, 'store']);
+
+// Route para i-update ang status (Suspend/Activate)
+Route::put('/admin/accounts/{user_id}/status', [AdminAccountController::class, 'updateStatus']);
+
+// Route para mag-update ng account details
+Route::put('/admin/accounts/{user_id}', [AdminAccountController::class, 'update']);
+
+// Route para sa Monitor Subscriptions
+Route::get('/admin/subscriptions', [AdminSubscriptionController::class, 'index']);
+
+// Route para i-update ang subscription
+Route::put('/admin/subscriptions/{sub_id}', [AdminSubscriptionController::class, 'update']);
+
