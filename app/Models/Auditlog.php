@@ -7,12 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Auditlog extends Model
 {
     protected $primaryKey = 'log_id';
-
-    protected $fillable = [
-        'user_id',
-        'action_type',
-        'description',
-    ];
+    protected $table = 'audit_logs';
+    protected $fillable = ['user_id', 'action', 'table_name', 'record_id', 'details'];
 
     // Define the relationship: An audit log belongs to a user
     public function user()

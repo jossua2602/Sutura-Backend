@@ -5,6 +5,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\AdminRegistrationController;
 use App\Http\Controllers\Api\AdminAccountController;
 use App\Http\Controllers\Api\AdminSubscriptionController;
+use App\Http\Controllers\Api\AdminDashboardController;
+use App\Http\Controllers\Api\PublicRegistrationController;
+use App\Http\Controllers\Api\ActivityLogController;
+use App\Http\Controllers\Api\ShopAccountController;
 
 Route::get('/test-connection', function () {
     return response()->json([
@@ -22,9 +26,8 @@ Route::get('/admin/registrations', [AdminRegistrationController::class, 'index']
 // Route para kunin ang pending shop registrations
 Route::get('/admin/registrations/pending', [AdminRegistrationController::class, 'getPending']);
 
-// Route para i-update ang status (Approve/Reject)
+// Siguraduhing PUT ang gamit dito at hindi GET o POST
 Route::put('/admin/registrations/{shop_id}/status', [AdminRegistrationController::class, 'updateStatus']);
-
 // Route para sa Manage Accounts
 Route::get('/admin/accounts', [AdminAccountController::class, 'index']);
 
@@ -43,3 +46,13 @@ Route::get('/admin/subscriptions', [AdminSubscriptionController::class, 'index']
 // Route para i-update ang subscription
 Route::put('/admin/subscriptions/{sub_id}', [AdminSubscriptionController::class, 'update']);
 
+// Route para sa Main Dashboard Stats
+Route::get('/admin/dashboard-stats', [AdminDashboardController::class, 'getStats']);
+
+Route::post('/register-shop', [PublicRegistrationController::class, 'store']);
+
+// Idagdag ito:
+Route::get('/admin/activity-logs', [ActivityLogController::class, 'index']);
+
+Route::get('/admin/shop-accounts', [ShopAccountController::class, 'index']);
+Route::put('/admin/shop-accounts/{id}/toggle-status', [ShopAccountController::class, 'toggleStatus']);

@@ -12,22 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('audit_logs', function (Blueprint $table) {
-            $table->id('log_id'); // Primary Key
-            $table->unsignedBigInteger('user_id'); // Foreign Key
-            $table->string('action_type');
-            $table->text('description');
+            $table->id('log_id');
+            $table->unsignedBigInteger('user_id');
+            $table->string('action'); // Binago natin mula action_type
+            $table->string('table_name'); // Idagdag ito dahil ginamit natin sa logAction
+            $table->unsignedBigInteger('record_id'); // Idagdag ito
+            $table->text('details'); // Binago natin mula description
             $table->timestamps();
 
-            // Foreign key constraint connecting to the users table
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('auditlogs');
+        Schema::dropIfExists('audit_logs'); // Itinama ang pangalan
     }
 };

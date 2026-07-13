@@ -9,14 +9,14 @@ class Subscription extends Model
 {
     use HasFactory;
 
-    // Itugma ang Primary Key
-    protected $primaryKey = 'sub_id';
-
+    protected $primaryKey = 'subscription_id';
+    
     protected $fillable = [
-        'shop_name', // Kadalasan 'shop_id' ito na naka-join, pero gamitin muna natin ang name para mabilis i-test
+        'shop_name', 
         'plan',
-        'start_date',
-        'end_date',
-        'status',
+        'billing_cycle',
+        'start_date', 
+        'end_date', 
+        'status'
     ];
 }
